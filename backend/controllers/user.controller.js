@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+import { v2 as cloudinary } from "cloudinary";
+import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import Notification from "../models/notification.model.js";
+import { extractCloudinaryPublicId } from "../lib/utils/extractCloudinaryPublicId.js";
 
 // get user profile controller function
 export const getUserProfile = async (req, res) => {
@@ -117,4 +120,108 @@ export const getSuggestedUsers = async (req, res) => {
 };
 
 // update user profile controller function
-export const updateUserProfile = async (req, res) => {};
+export const updateUserProfile = async (req, res) => {
+  try {
+    if (!req.body) {
+      return res.status(400).json({ error: "No data provided" });
+    }
+    const {
+      name,
+      bio,
+      link,
+      currentPassword,
+      newPassword,
+      coverImage,
+      profileImage,
+    } = req.body;
+    // check if any field is provided to update
+
+    const userId = req.user._id; // get user id from request object
+    // check if id is valid ObjectId using mongoose.Types.ObjectId.isValid()
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid user id" });
+    }
+
+    // check if user exists
+    let user = await User.findById(userId); // find user by id
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    // check if current password is provided and matches the one in database
+    if (currentPassword || newPassword) {
+      if (!currentPassword || !newPassword) {
+        return res
+          .status(400)
+          .json({ error: "Please provide both current and new password" });
+      }
+      //   compare passwords using bcrypt.compare()
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ error: "Current password is incorrect" });
+      }
+      if (newPassword.length < 6) {
+        return res
+          .status(400)
+          .json({ error: "Password must be at least 6 characters long" });
+      }
+      // update password using bcrypt.hash()
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(newPassword, salt);
+      user.password = hashedPassword;
+    }
+
+    // handle image upload if any
+    if (profileImage) {
+      if (user.profileImage) {
+        // delete old image from cloudinary
+        const publicId = extractCloudinaryPublicId(user.profileImage);
+        if (publicId) {
+          await cloudinary.uploader.destroy(publicId);
+        }
+      }
+      // upload new image to cloudinary and get the url
+      const result = await cloudinary.uploader.upload(profileImage, {
+        folder: "user_profiles",
+      });
+      user.profileImage = result.secure_url;
+    }
+
+    // handle upload cover image if any
+    if (coverImage) {
+      if (user.coverImage) {
+        // delete old image from cloudinary
+        const publicId = extractCloudinaryPublicId(user.coverImage);
+        if (publicId) {
+          await cloudinary.uploader.destroy(publicId);
+        }
+      }
+      // upload new image to cloudinary and get the url
+      const result = await cloudinary.uploader.upload(coverImage, {
+        folder: "user_profiles",
+      });
+      user.coverImage = result.secure_url;
+    }
+
+    // handle update of other fields if any
+    user.name = name ?? user.name;
+    user.bio = bio ?? user.bio;
+    user.link = link ?? user.link;
+    // save the updated user to database
+    await user.save();
+
+    // remove password from response before sending to client
+    const userResponse = user.toObject();
+
+    delete userResponse.password; // this will apply only on client side and not in database
+
+    // send response to client
+    return res.status(200).json({
+      user: userResponse,
+      message: "User profile updated successfully",
+    });
+  } catch (error) {
+    // handle error and send appropriate response to client
+    console.log("Error updating user profile:", error.message);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
