@@ -1,7 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
+
+// routes
 import authRoute from "./routes/auth.route.js";
-import connectDb from "./db/connectdb.js";
+import userRoute from "./routes/user.route.js";
+
+import connectDb from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -16,6 +20,7 @@ app.use(cookieParser()); // to parse cookies from req.cookies
 
 // routes
 app.use("/api/auth", authRoute);
+app.use("/api/user", userRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

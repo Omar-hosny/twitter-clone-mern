@@ -25,13 +25,11 @@ const userSchema = new mongoose.Schema(
     },
     profileImage: {
       type: String,
-      default:
-        "https://res.cloudinary.com/dxfq3iotg/image/upload/v1609474070/avatar_default.jpg",
+      default: "",
     },
     coverImage: {
       type: String,
-      default:
-        "https://res.cloudinary.com/dxfq3iotg/image/upload/v1609474070/cover_photo_default.jpg",
+      default: "",
     },
     followers: [
       {

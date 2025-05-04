@@ -51,7 +51,7 @@ export const signup = async (req, res) => {
         .json({ error: "Error creating new user or invalid data" });
     }
     // save new user to database and generate token to set cookie on the server
-    generateTokenAndSetCookie(newUser._id, res);
+    // generateTokenAndSetCookie(newUser._id, res);
     await newUser.save();
     return res.status(201).json({ message: "User created successfully" });
     // create new user
