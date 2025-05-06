@@ -122,18 +122,8 @@ export const getSuggestedUsers = async (req, res) => {
 // update user profile controller function
 export const updateUserProfile = async (req, res) => {
   try {
-    if (!req.body) {
-      return res.status(400).json({ error: "No data provided" });
-    }
-    const {
-      name,
-      bio,
-      link,
-      currentPassword,
-      newPassword,
-      coverImage,
-      profileImage,
-    } = req.body;
+    const { name, bio, link, currentPassword, newPassword } = req.body;
+    let { coverImage, profileImage } = req.body;
     // check if any field is provided to update
 
     const userId = req.user._id; // get user id from request object

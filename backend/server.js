@@ -4,7 +4,9 @@ import { v2 as cloudinary } from "cloudinary";
 // routes
 import authRoute from "./routes/auth.route.js";
 import userRoute from "./routes/user.route.js";
+import postRoute from "./routes/post.route.js";
 
+// connect to db
 import connectDb from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
 
@@ -28,6 +30,7 @@ app.use(cookieParser()); // to parse cookies from req.cookies
 // routes
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/post", postRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
