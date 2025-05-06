@@ -28,7 +28,4 @@ router.get("/following-posts", protectedRoute, getFollowingPosts);
 router.get("/all", protectedRoute, getAllPosts);
 router.get("/user/:username", protectedRoute, getUserPosts);
 
-// router.get("/", getPosts);
-// router.get("/:id", getPostById);
-
 export default router;
