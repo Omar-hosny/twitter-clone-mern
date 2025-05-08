@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
-import { Button } from "../ui/button";
 import { Bell, House, User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 
 const Sidebar = () => {
   return (
@@ -45,8 +45,8 @@ const Sidebar = () => {
       </div>
       {/* bottom avatar and name  */}
       <div className="flex w-5/6 items-center gap-4 mt-4 p-2 border border-gray-200 cursor-pointer hover:bg-gray-100 rounded-4xl">
-        <div className="p-2">
-          <Avatar>
+        <div>
+          <Avatar style={{ width: "40px", height: "40px", margin: "0 10px" }}>
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
