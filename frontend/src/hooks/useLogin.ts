@@ -3,8 +3,9 @@ import { loginSchema, LoginSchema } from "@/validations/loginSchema";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import handleSuccessLogin from "@/lib/handleSuccessLogin";
+import handleErrorLogin from "@/lib/handleErrorLogin";
 const useLogin = () => {
   const navigate = useNavigate();
   // function to handle login API call
@@ -31,22 +32,10 @@ const useLogin = () => {
     mutationFn: onLogin,
 
     onSuccess: (data) => {
-      // localStorage.setItem("token", data.token);
-      // localStorage.setItem("user", JSON.stringify(data.user));
-      console.log("Login successful", data);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/");
+      handleSuccessLogin(data.user, navigate);
     },
     onError: (error) => {
-      let errorMessage = "An unexpected error occurred";
-
-      if (axios.isAxiosError(error)) {
-        errorMessage =
-          error.response?.data?.error || error.message || "Network error";
-      }
-
-      setError("root", { message: errorMessage });
-      console.log("Login failed", error);
+      handleErrorLogin(error, setError);
     },
   });
 

@@ -1,23 +1,16 @@
 // import { axiosInstance } from "@/lib/axios-global";
 
-// interface User {
-//   _id: string;
-//   username: string;
-//   email: string;
-//   bio: string;
-//   profileImg: string;
-//   coverImg: string;
-//   followers: string[];
-//   following: string[];
-//   link: string;
-// }
+import Cookies from "js-cookie";
 
 function useAuth() {
   //   const getUser = async () => {
   //     const res = await axiosInstance.get("/auth/me");
   //     return res.data;
   //   };
-  const currentUser = !!localStorage.getItem("user");
+  const currentUser = Cookies.get("user");
+  if (currentUser) {
+    console.log(JSON.parse(currentUser));
+  }
 
   return { currentUser };
   //   return { getUser };

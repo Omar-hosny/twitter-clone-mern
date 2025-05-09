@@ -9,7 +9,9 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Link } from "react-router";
+import useSignUp from "@/hooks/useSignUp";
 const SignUpForm = () => {
+  const { register, onSubmit, isLoading, errors } = useSignUp();
   return (
     <>
       <Card className=" shadow-none">
@@ -20,30 +22,77 @@ const SignUpForm = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={onSubmit}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" type="text" placeholder="Enter your name" />
+                <Input
+                  {...register("name")}
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name"
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm">{errors.name.message}</p>
+                )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="username">Username</Label>
                 <Input
+                  {...register("username")}
                   id="username"
                   type="text"
                   placeholder="Enter your username"
                 />
+                {errors.username && (
+                  <p className="text-red-500 text-sm">
+                    {errors.username.message}
+                  </p>
+                )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="m@example.com" />
+                <Input
+                  {...register("email")}
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" required />
+                <Input
+                  {...register("password")}
+                  id="password"
+                  type="password"
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
+              <div className="grid gap-2">
+                <Label htmlFor="confirmPassword">Confirm password</Label>
+                <Input
+                  {...register("confirmPassword")}
+                  id="confirmPassword"
+                  type="password"
+                />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm">
+                    {errors.confirmPassword.message}
+                  </p>
+                )}
+              </div>
+              {errors.root && (
+                <p className="text-red-500 text-sm">{errors.root.message}</p>
+              )}
               <Button type="submit" className="w-full">
-                Sign up
+                {isLoading ? "Signing up..." : "Sign up"}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">

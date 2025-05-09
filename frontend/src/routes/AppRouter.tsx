@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import Layout from "@/layouts/Layout";
 import LoginPage from "@/pages/auth/LoginPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
@@ -9,6 +10,7 @@ import ProfilePage from "@/pages/ProfilePage";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import PrivateRoute from "@/services/PrivateRoute";
 import PublicRoute from "@/services/PublicRoute";
+import { Toaster } from "@/components/ui/sonner";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +72,7 @@ const AppRouter = () => {
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
+      <Toaster />
     </QueryClientProvider>
   );
 };

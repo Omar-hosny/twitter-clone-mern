@@ -4,10 +4,10 @@ import Post from "@/components/shared/Post";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col h-screen overflow-y-auto scrollbar-hide">
+    <div className="flex flex-col h-full ">
       <HomeTabs />
       <CreatePostForm />
-      <div className="flex flex-col mt-2">
+      <div className="flex flex-col mt-2 pb-96">
         <Post />
         <Post />
         <Post />

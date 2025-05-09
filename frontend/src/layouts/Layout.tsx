@@ -12,7 +12,12 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
       <div className="hidden md:block md:col-span-2 lg:col-span-3 xl:col-span-3 ">
         <Sidebar />
       </div>
-      <main className="border-x border-1 min-h-full col-span-full md:col-span-5 xl:col-span-6 lg:col-span-6">
+      <main
+        className="border-x border-1 h-screen col-span-full 
+        md:col-span-5 xl:col-span-6 lg:col-span-6 
+      overflow-y-auto scrollbar-hide
+      "
+      >
         {children}
       </main>
       <div className="p-4 hidden xl:col-span-3 xl:block  ">

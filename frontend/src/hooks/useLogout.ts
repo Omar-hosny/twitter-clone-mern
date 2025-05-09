@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios-global";
 import axios from "axios";
+import Cookies from "js-cookie";
 const useLogout = () => {
   const navigate = useNavigate();
   let errorMessage = "";
@@ -14,6 +15,7 @@ const useLogout = () => {
     mutationFn: logoutAction,
     onSuccess: () => {
       localStorage.removeItem("user");
+      Cookies.remove("user");
       navigate("/sign-in");
     },
     onError: (error) => {
