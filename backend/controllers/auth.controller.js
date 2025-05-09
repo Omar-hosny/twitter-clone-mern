@@ -104,12 +104,25 @@ export const login = async (req, res) => {
 };
 
 // logout controller function
-export const logout = async (req, res) => {
+export const logout = async (_req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.log("Error logout controller: ", error.message);
     res.status(500).json({ error: "Internal server error Error logging out" });
+  }
+};
+export const getMe = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log("Error getting me in controller: ", error.message);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };

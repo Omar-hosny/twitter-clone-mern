@@ -7,6 +7,8 @@ import HomePage from "@/pages/HomePage";
 import Notifications from "@/pages/Notifications";
 import ProfilePage from "@/pages/ProfilePage";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import PrivateRoute from "@/services/PrivateRoute";
+import PublicRoute from "@/services/PublicRoute";
 
 const queryClient = new QueryClient();
 
@@ -14,32 +16,40 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Layout>
-        <HomePage />
-      </Layout>
+      <PrivateRoute>
+        <Layout>
+          <HomePage />
+        </Layout>
+      </PrivateRoute>
     ),
   },
   {
     path: "/profile/:username",
     element: (
-      <Layout>
-        <ProfilePage />
-      </Layout>
+      <PrivateRoute>
+        <Layout>
+          <ProfilePage />
+        </Layout>
+      </PrivateRoute>
     ),
   },
   {
     path: "/notfications",
     element: (
-      <Layout>
-        <Notifications />
-      </Layout>
+      <PrivateRoute>
+        <Layout>
+          <Notifications />
+        </Layout>
+      </PrivateRoute>
     ),
   },
   {
     path: "/sign-in",
     element: (
       <>
-        <LoginPage />
+        <PublicRoute>
+          <LoginPage />
+        </PublicRoute>
       </>
     ),
   },
@@ -47,7 +57,9 @@ const router = createBrowserRouter([
     path: "/sign-up",
     element: (
       <>
-        <SignUpPage />
+        <PublicRoute>
+          <SignUpPage />
+        </PublicRoute>
       </>
     ),
   },

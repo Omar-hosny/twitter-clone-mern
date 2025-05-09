@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import { Bell, House, User } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
+import LogoutBottom from "../LogoutBottom";
 
 const Sidebar = () => {
   return (
@@ -43,19 +43,8 @@ const Sidebar = () => {
           </NavLink>
         </Button>
       </div>
-      {/* bottom avatar and name  */}
-      <div className="flex w-5/6 items-center gap-4 mt-4 p-2 border border-gray-200 cursor-pointer hover:bg-gray-100 rounded-4xl">
-        <div>
-          <Avatar style={{ width: "40px", height: "40px", margin: "0 10px" }}>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </div>
-        <div className="flex flex-col items-start ">
-          <p className="text-gray-800">name</p>
-          <p className="text-gray-600">@username</p>
-        </div>
-      </div>
+      {/* bottom avatar and name for logout user  */}
+      <LogoutBottom />
     </aside>
   );
 };

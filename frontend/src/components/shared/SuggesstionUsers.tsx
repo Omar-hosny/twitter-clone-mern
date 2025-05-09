@@ -22,7 +22,7 @@ const SuggesstionUsers = () => {
           </div>
         </div>
         <div>
-          <Button variant="outline">Follow</Button>
+          <Button>Follow</Button>
         </div>
       </div>
       <div className=" flex items-center justify-between">
@@ -39,7 +39,7 @@ const SuggesstionUsers = () => {
           </div>
         </div>
         <div>
-          <Button variant="outline">Follow</Button>
+          <Button>Follow</Button>
         </div>
       </div>
     </aside>
