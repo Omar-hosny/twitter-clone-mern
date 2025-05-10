@@ -3,6 +3,8 @@ import { useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
+import useGetUser from "@/hooks/useGetUser";
+import getFirstTwoChar from "@/lib/getFirstTwoChar";
 
 const CreatePostForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -11,12 +13,18 @@ const CreatePostForm = () => {
       inputRef.current.click();
     }
   };
+  const { data } = useGetUser();
+  const shortName = getFirstTwoChar(data?.name ?? "");
+
   return (
     <div className="flex items-center mt-2 border-b border-gray-100">
       <div className="flex self-start justify-center  relative">
         <Avatar style={{ width: "40px", height: "40px", margin: "0 10px" }}>
-          <AvatarImage sizes="50px" src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage
+            sizes="50px"
+            src={data?.profileImg || "/svgs/no-user.jpg"}
+          />
+          <AvatarFallback>{shortName}</AvatarFallback>
         </Avatar>
       </div>
       <div className="w-full flex flex-col">

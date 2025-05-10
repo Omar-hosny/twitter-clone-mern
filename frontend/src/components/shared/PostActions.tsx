@@ -1,11 +1,15 @@
 import { Heart, MessageCircle, Repeat2 } from "lucide-react";
 
-const PostActions = () => {
+type PostActionsCount = {
+  likesCount: number;
+  commentsCount: number;
+};
+const PostActions = ({ likesCount, commentsCount }: PostActionsCount) => {
   return (
     <div className="w-full flex items-center justify-evenly pt-2 pb-1 text-gray-600 text-sm">
       <span className="flex items-center gap-2">
         <MessageCircle size={20} />
-        <p>3</p>
+        <p>{commentsCount}</p>
       </span>
       <span className="flex items-center gap-2">
         <Repeat2 size={20} />
@@ -13,7 +17,7 @@ const PostActions = () => {
       </span>
       <span className="flex items-center gap-2">
         <Heart size={20} />
-        <p>23</p>
+        <p>{likesCount}</p>
       </span>
     </div>
   );

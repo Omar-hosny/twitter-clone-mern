@@ -13,9 +13,8 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
         <Sidebar />
       </div>
       <main
-        className="border-x border-1 h-screen col-span-full 
+        className="border-x border-1 min-h-full col-span-full 
         md:col-span-5 xl:col-span-6 lg:col-span-6 
-      overflow-y-auto scrollbar-hide
       "
       >
         {children}

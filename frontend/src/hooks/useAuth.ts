@@ -8,9 +8,6 @@ function useAuth() {
   //     return res.data;
   //   };
   const currentUser = Cookies.get("user");
-  if (currentUser) {
-    console.log(JSON.parse(currentUser));
-  }
 
   return { currentUser };
   //   return { getUser };

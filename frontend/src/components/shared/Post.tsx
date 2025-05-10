@@ -1,11 +1,19 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import PostActions from "./PostActions";
+import { Post as PostType } from "@/types";
+import getFirstTwoChar from "@/lib/getFirstTwoChar";
+import { Link } from "react-router";
 
-const Post = () => {
+const Post = ({ post }: { post: PostType }) => {
+  const shortName = getFirstTwoChar(post.user.name ?? "");
   return (
     <article className="w-full flex items-center gap-2 border-b border-gray-200 p-2">
       {/* avatar */}
-      <div className="flex self-start justify-center  relative">
+
+      <Link
+        to={`/profile/${post.user.username}`}
+        className="flex self-start justify-center  relative"
+      >
         <Avatar
           style={{
             width: "40px",
@@ -16,31 +24,36 @@ const Post = () => {
         >
           <AvatarImage
             style={{ borderRadius: "100%" }}
-            src="https://github.com/shadcn.png"
+            src={post.user.profileImg || "/svgs/no-user.jpg"}
           />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>{shortName}</AvatarFallback>
         </Avatar>
-      </div>
+      </Link>
       {/* right side of post */}
       <div className="w-full flex flex-col">
         {/* name and username */}
-        <div className="flex items-center gap-1">
-          <p className="text-gray-800">omar</p>
-          <p className="text-gray-500">@yrfavomar</p>
-        </div>
+        <Link
+          to={`/profile/${post.user.username}`}
+          className="flex items-center gap-1"
+        >
+          <p className="text-gray-800 font-semibold">{post.user.name}</p>
+          <p className="text-gray-400">@{post.user.username}</p>
+        </Link>
         {/* post body */}
         <div className="flex flex-col gap-3 mt-2">
-          <p className="text-sm text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            voluptatibus.
-          </p>
-          <img
-            className="w-full h-auto rounded-lg"
-            src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-            alt="postimage"
-          />
+          <p className=" text-gray-800">{post.text}</p>
+          {post.image && (
+            <img
+              className="w-full h-auto rounded-lg"
+              src={post.image}
+              alt="postimage"
+            />
+          )}
         </div>
-        <PostActions />
+        <PostActions
+          likesCount={post.likes.length}
+          commentsCount={post.comments.length}
+        />
       </div>
     </article>
   );
