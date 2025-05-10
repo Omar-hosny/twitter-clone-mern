@@ -10,6 +10,7 @@ import useCreatePost from "@/hooks/useCreatePost";
 const CreatePostForm = () => {
   const [imageUrl, setImageUrl] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
   const handleUploadClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
@@ -17,8 +18,10 @@ const CreatePostForm = () => {
   };
   const { data } = useGetUser();
   const shortName = getFirstTwoChar(data?.name ?? "");
-  const { register, onSubmit, errors, isLoading, setValue } =
+  const { register, onSubmit, errors, isLoading, setValue, watch } =
     useCreatePost(setImageUrl);
+
+  const isTextEmpty = watch("text")?.trim() === "";
 
   const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -100,7 +103,7 @@ const CreatePostForm = () => {
             onChange={handleImgChange}
           />
           <Button
-            disabled={isLoading}
+            disabled={isLoading || isTextEmpty}
             type="submit"
             className=" rounded-full px-4 py-2 mx-2"
           >

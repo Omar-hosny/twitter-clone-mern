@@ -1,15 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import PostActions from "./PostActions";
-import { Post as PostType } from "@/types";
-import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { Link } from "react-router";
+import PostActions from "./PostActions";
+import getFirstTwoChar from "@/lib/getFirstTwoChar";
+import { Post as PostType } from "@/types";
+import DeletePostBtn from "../DeletePostBtn";
 
 const Post = ({ post }: { post: PostType }) => {
   const shortName = getFirstTwoChar(post.user.name ?? "");
   return (
     <article className="w-full flex items-center gap-2 border-b border-gray-200 p-2">
       {/* avatar */}
-
       <Link
         to={`/profile/${post.user.username}`}
         className="flex self-start justify-center  relative"
@@ -32,13 +32,18 @@ const Post = ({ post }: { post: PostType }) => {
       {/* right side of post */}
       <div className="w-full flex flex-col">
         {/* name and username */}
-        <Link
-          to={`/profile/${post.user.username}`}
-          className="flex items-center gap-1"
-        >
-          <p className="text-gray-800 font-semibold">{post.user.name}</p>
-          <p className="text-gray-400">@{post.user.username}</p>
-        </Link>
+        <div className="flex-1 flex items-center justify-between">
+          <Link
+            to={`/profile/${post.user.username}`}
+            className="flex items-center gap-1"
+          >
+            <p className="text-gray-800 font-semibold">{post.user.name}</p>
+            <p className="text-gray-400">@{post.user.username}</p>
+          </Link>
+          {/* delete post button */}
+          <DeletePostBtn postId={post._id} userPostId={post.user._id} />
+        </div>
+
         {/* post body */}
         <div className="flex flex-col gap-3 mt-2">
           <p className=" text-gray-800">{post.text}</p>

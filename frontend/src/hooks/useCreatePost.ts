@@ -21,6 +21,7 @@ const useCreatePost = (setImageUrl: Dispatch<SetStateAction<string>>) => {
     formState: { errors },
     reset,
     setValue,
+    watch,
   } = useForm<CreatePostSchema>({
     resolver: zodResolver(createPostSchema),
   });
@@ -51,6 +52,7 @@ const useCreatePost = (setImageUrl: Dispatch<SetStateAction<string>>) => {
     errors,
     onSubmit,
     setValue,
+    watch,
   };
 };
 
