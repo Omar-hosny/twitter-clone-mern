@@ -1,12 +1,14 @@
-import { Image } from "lucide-react";
-import { useRef } from "react";
+import { Image, X } from "lucide-react";
+import { useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import useGetUser from "@/hooks/useGetUser";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
+import useCreatePost from "@/hooks/useCreatePost";
 
 const CreatePostForm = () => {
+  const [imageUrl, setImageUrl] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const handleUploadClick = () => {
     if (inputRef.current) {
@@ -15,6 +17,24 @@ const CreatePostForm = () => {
   };
   const { data } = useGetUser();
   const shortName = getFirstTwoChar(data?.name ?? "");
+  const { register, onSubmit, errors, isLoading, setValue } =
+    useCreatePost(setImageUrl);
+
+  const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target?.result as string;
+        setImageUrl(imageUrl);
+        setValue("image", imageUrl);
+
+        // Do something with the image URL, such as display it in an image element
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div className="flex items-center mt-2 border-b border-gray-100">
@@ -27,12 +47,40 @@ const CreatePostForm = () => {
           <AvatarFallback>{shortName}</AvatarFallback>
         </Avatar>
       </div>
-      <div className="w-full flex flex-col">
+      <form onSubmit={onSubmit} className="w-full flex flex-col">
         <Textarea
           placeholder="What's on your mind?"
           className="w-[98%] p-4"
           rows={4}
+          {...register("text")}
         />
+        {errors?.text && (
+          <p className="text-red-500 text-sm py-2">{errors?.text?.message}</p>
+        )}
+        {errors?.image && (
+          <p className="text-red-500 text-sm">{errors?.image?.message}</p>
+        )}
+        {imageUrl && (
+          <div className="flex justify-center items-center mt-2 p-2 relative">
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => {
+                setImageUrl("");
+                setValue("image", "");
+              }}
+              size="icon"
+              className="absolute top-2 right-2 bg-gray-50"
+            >
+              <X className=" w-6! h-6!" />
+            </Button>
+            <img
+              src={imageUrl}
+              alt="Uploaded Image"
+              className="w-full max-w-[300px] h-auto mt-2 mx-auto"
+            />
+          </div>
+        )}
         <span className="w-[98%] h-[1px] bg-gray-100 mt-2" />
         <div className="flex items-center justify-between p-2">
           <Button
@@ -46,13 +94,20 @@ const CreatePostForm = () => {
           <input
             ref={inputRef}
             type="file"
-            accept="images/*"
+            accept="image/*"
             id="image-upload"
             className="hidden"
+            onChange={handleImgChange}
           />
-          <Button className=" rounded-full px-4 py-2 mx-2">Post</Button>
+          <Button
+            disabled={isLoading}
+            type="submit"
+            className=" rounded-full px-4 py-2 mx-2"
+          >
+            {isLoading ? "posting..." : "post"}
+          </Button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

@@ -44,7 +44,7 @@ const Post = ({ post }: { post: PostType }) => {
           <p className=" text-gray-800">{post.text}</p>
           {post.image && (
             <img
-              className="w-full h-auto rounded-lg"
+              className="w-full object-contain max-h-[450px]  rounded-lg"
               src={post.image}
               alt="postimage"
             />

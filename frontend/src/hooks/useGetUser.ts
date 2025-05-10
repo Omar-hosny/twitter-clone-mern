@@ -11,7 +11,6 @@ const useGetUser = () => {
     queryKey: ["currentUser"],
     queryFn: getUser,
   });
-  console.log(data);
   return {
     data,
     isLoading,
