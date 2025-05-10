@@ -11,23 +11,23 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import useDeletePost from "@/hooks/useDeletePost";
-import useGetUser from "@/hooks/useGetUser";
 
 const DeletePostBtn = ({
   postId,
   userPostId,
+  currentUserId,
 }: {
   postId: string;
   userPostId: string;
+  currentUserId: string | null;
 }) => {
-  const { data: user } = useGetUser();
   const { deleteMutaion, isLoading } = useDeletePost();
 
+  if (!currentUserId) return null;
   //  check if user is the owner of the post
-  if (user && user._id !== userPostId) {
+  if (currentUserId !== userPostId) {
     return null;
   }
-  if (!user) return null; // if user is not logged in, return null, else return the rest
 
   const handleDelete = () => {
     deleteMutaion.mutate(postId);

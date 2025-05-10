@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios-global";
 import axios from "axios";
 import Cookies from "js-cookie";
 const useLogout = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   let errorMessage = "";
   const logoutAction = async () => {
     const res = await axiosInstance.post("/auth/logout");
@@ -14,8 +15,8 @@ const useLogout = () => {
   const logoutMutation = useMutation({
     mutationFn: logoutAction,
     onSuccess: () => {
-      localStorage.removeItem("user");
       Cookies.remove("user");
+      queryClient.clear();
       navigate("/sign-in");
     },
     onError: (error) => {

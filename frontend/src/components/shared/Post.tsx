@@ -4,8 +4,11 @@ import PostActions from "./PostActions";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { Post as PostType } from "@/types";
 import DeletePostBtn from "../DeletePostBtn";
+import useGetUser from "@/hooks/useGetUser";
 
 const Post = ({ post }: { post: PostType }) => {
+  const { data: user } = useGetUser();
+
   const shortName = getFirstTwoChar(post.user.name ?? "");
   return (
     <article className="w-full flex items-center gap-2 border-b border-gray-200 p-2">
@@ -41,7 +44,11 @@ const Post = ({ post }: { post: PostType }) => {
             <p className="text-gray-400">@{post.user.username}</p>
           </Link>
           {/* delete post button */}
-          <DeletePostBtn postId={post._id} userPostId={post.user._id} />
+          <DeletePostBtn
+            currentUserId={user?._id ?? null}
+            postId={post._id}
+            userPostId={post.user._id}
+          />
         </div>
 
         {/* post body */}
@@ -55,10 +62,7 @@ const Post = ({ post }: { post: PostType }) => {
             />
           )}
         </div>
-        <PostActions
-          likesCount={post.likes.length}
-          commentsCount={post.comments.length}
-        />
+        <PostActions post={post} userId={user?._id ?? ""} />
       </div>
     </article>
   );
