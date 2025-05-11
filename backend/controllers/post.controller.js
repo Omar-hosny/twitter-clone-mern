@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { v2 as cloudinary } from "cloudinary";
 import User from "../models/user.model.js";
 import Post from "../models/post.model.js";
-import Notification from "../models/Notification.model.js";
+import Notification from "../models/notification.model.js";
 
 export const createPost = async (req, res) => {
   try {
