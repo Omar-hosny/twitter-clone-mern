@@ -3,8 +3,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { Link } from "react-router";
+import useFollow from "@/hooks/useFollow";
+import { Loader2 } from "lucide-react";
 
 const SuggesstionUserItem = ({ user }: { user: User }) => {
+  const { followMutation, isLoading } = useFollow();
   const shortName = getFirstTwoChar(user.name ?? "");
   return (
     <div className=" flex items-center justify-between">
@@ -24,7 +27,19 @@ const SuggesstionUserItem = ({ user }: { user: User }) => {
         </div>
       </Link>
       <div>
-        <Button size="sm">Follow</Button>
+        <Button
+          onClick={() => {
+            followMutation.mutate(user._id);
+          }}
+          size="sm"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <Loader2 className=" animate-spin duration-300 ease-in-out" />
+          ) : (
+            "Follow"
+          )}
+        </Button>
       </div>
     </div>
   );
