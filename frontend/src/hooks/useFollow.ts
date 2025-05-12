@@ -1,8 +1,11 @@
 import { axiosInstance } from "@/lib/axios-global";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router";
 import { toast } from "sonner";
 
 const useFollow = () => {
+  const { username } = useParams();
+  // const location = useLocation()
   const queryClient = useQueryClient();
   const handleFollow = async (userId: string) => {
     const res = await axiosInstance.post(`/user/follow-unfollow/${userId}`);
@@ -15,9 +18,17 @@ const useFollow = () => {
     onSuccess: (data) => {
       console.log(data);
       queryClient.invalidateQueries({ queryKey: ["suggested-users"] });
-      toast.success("user followed successfully", {
+      toast.success(data.message, {
         position: "top-center",
       });
+      if (username) {
+        queryClient.invalidateQueries({
+          queryKey: [`profile-${username}`],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [`currentUser`],
+        });
+      }
     },
     onError: (err) => {
       console.log(err);

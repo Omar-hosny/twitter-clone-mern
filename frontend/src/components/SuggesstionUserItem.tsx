@@ -1,13 +1,12 @@
-import { User } from "@/types";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
-import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { Link } from "react-router";
-import useFollow from "@/hooks/useFollow";
-import { Loader2 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { User } from "@/types";
+import getFirstTwoChar from "@/lib/getFirstTwoChar";
+
+import FollowBtn from "./shared/FollowBtn";
+import AvatarImg from "./shared/AvatarImg";
 
 const SuggesstionUserItem = ({ user }: { user: User }) => {
-  const { followMutation, isLoading } = useFollow();
   const shortName = getFirstTwoChar(user.name ?? "");
   return (
     <div className=" flex items-center justify-between">
@@ -16,10 +15,12 @@ const SuggesstionUserItem = ({ user }: { user: User }) => {
         className="flex items-center space-x-2"
       >
         <div>
-          <Avatar>
-            <AvatarImage src={user.profileImg || "/svgs/no-user.jbg"} />
-            <AvatarFallback>{shortName}</AvatarFallback>
-          </Avatar>
+          <AvatarImg
+            imageUrl={user?.profileImage}
+            shortName={shortName}
+            width="40px"
+            height="40px"
+          />
         </div>
         <div className="flex flex-col items-start ">
           <p className="text-gray-800">{user.name}</p>
@@ -27,19 +28,7 @@ const SuggesstionUserItem = ({ user }: { user: User }) => {
         </div>
       </Link>
       <div>
-        <Button
-          onClick={() => {
-            followMutation.mutate(user._id);
-          }}
-          size="sm"
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <Loader2 className=" animate-spin duration-300 ease-in-out" />
-          ) : (
-            "Follow"
-          )}
-        </Button>
+        <FollowBtn userId={user._id} />
       </div>
     </div>
   );

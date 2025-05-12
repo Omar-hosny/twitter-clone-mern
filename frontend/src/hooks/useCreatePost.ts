@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { axiosInstance } from "@/lib/axios-global";
 import createPostSchema, {
   CreatePostSchema,
@@ -6,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 const useCreatePost = (setImageUrl: Dispatch<SetStateAction<string>>) => {
   const queryClient = useQueryClient();

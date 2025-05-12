@@ -26,6 +26,6 @@ router.delete(
 router.get("/liked-posts/:id", protectedRoute, getLikedPosts);
 router.get("/following-posts", protectedRoute, getFollowingPosts);
 router.get("/all", protectedRoute, getAllPosts);
-router.get("/user/:username", protectedRoute, getUserPosts);
+router.get("/user-posts/:username", protectedRoute, getUserPosts);
 
 export default router;

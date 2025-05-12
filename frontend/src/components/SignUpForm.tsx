@@ -91,7 +91,7 @@ const SignUpForm = () => {
               {errors.root && (
                 <p className="text-red-500 text-sm">{errors.root.message}</p>
               )}
-              <Button type="submit" className="w-full">
+              <Button disabled={isLoading} type="submit" className="w-full">
                 {isLoading ? "Signing up..." : "Sign up"}
               </Button>
             </div>

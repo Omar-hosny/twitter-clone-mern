@@ -13,11 +13,19 @@ const useLikePost = () => {
     mutationKey: ["like-post"],
     onSuccess: (data) => {
       console.log(data);
+      // queryClient.invalidateQueries({
+      //   queryKey: ["posts-all"],
+      // });
+      // queryClient.invalidateQueries({
+      //   queryKey: ["posts-following-posts"],
+      // });
       queryClient.invalidateQueries({
-        queryKey: ["posts-all"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["posts-following-posts"],
+        predicate: (query) => {
+          return (
+            typeof query.queryKey[0] === "string" &&
+            query.queryKey[0].includes("posts")
+          );
+        },
       });
     },
     onError: (error) => {

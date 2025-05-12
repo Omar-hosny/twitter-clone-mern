@@ -1,11 +1,11 @@
 import { Image, X } from "lucide-react";
 import { useRef, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import useGetUser from "@/hooks/useGetUser";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import useCreatePost from "@/hooks/useCreatePost";
+import AvatarImg from "./shared/AvatarImg";
 
 const CreatePostForm = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -41,14 +41,8 @@ const CreatePostForm = () => {
 
   return (
     <div className="flex items-center mt-2 border-b border-gray-100">
-      <div className="flex self-start justify-center  relative">
-        <Avatar style={{ width: "40px", height: "40px", margin: "0 10px" }}>
-          <AvatarImage
-            sizes="50px"
-            src={data?.profileImg || "/svgs/no-user.jpg"}
-          />
-          <AvatarFallback>{shortName}</AvatarFallback>
-        </Avatar>
+      <div className="flex self-start justify-center p-2 relative">
+        <AvatarImg imageUrl={data?.profileImage} shortName={shortName} />
       </div>
       <form onSubmit={onSubmit} className="w-full flex flex-col">
         <Textarea

@@ -3,6 +3,7 @@ import { v2 as cloudinary } from "cloudinary";
 import User from "../models/user.model.js";
 import Post from "../models/post.model.js";
 import Notification from "../models/notification.model.js";
+import { extractCloudinaryPublicId } from "../lib/utils/extractCloudinaryPublicId.js";
 
 export const createPost = async (req, res) => {
   try {
@@ -55,6 +56,20 @@ export const deletePost = async (req, res) => {
         .status(403)
         .json({ error: "You are not authorized to delete this post" });
     }
+    // delete image from cloudinary
+    if (post.image) {
+      try {
+        const publicId = extractCloudinaryPublicId(post.image);
+        if (publicId) {
+          await cloudinary.uploader.destroy(publicId);
+          // console.log(`Successfully deleted image with public ID: ${publicId}`);
+        }
+      } catch (cloudinaryError) {
+        // console.error("Error deleting image from Cloudinary:", cloudinaryError);
+        // Continue with post deletion even if image deletion fails
+      }
+    }
+
     await Post.findByIdAndDelete(id);
     return res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {

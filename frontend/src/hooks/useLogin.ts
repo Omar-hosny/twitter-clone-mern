@@ -12,7 +12,6 @@ const useLogin = () => {
   // using axiosInstance to make a POST request to the login endpoint
   const onLogin = async (data: LoginSchema) => {
     const res = await axiosInstance.post("/auth/signin", data);
-    console.log(res);
     return res.data;
   };
 

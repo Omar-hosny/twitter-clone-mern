@@ -4,11 +4,12 @@ export interface User {
   username: string;
   email: string;
   bio: string;
-  profileImg: string;
-  coverImg: string;
+  profileImage: string;
+  coverImage: string;
   followers: string[];
   following: string[];
   link: string;
+  createdAt: string;
 }
 
 export interface Post {
@@ -18,6 +19,23 @@ export interface Post {
   image: string;
   likes: string[];
   comments: string[];
+}
+
+// types/notifications for Notification component
+export interface NotificationUser {
+  _id: string;
+  name: string;
+  username: string;
+  profileImage: string;
+}
+
+export interface Notification {
+  _id: string;
+  from: NotificationUser;
+  type: "like" | "follow";
+  isRead: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export enum PostsEnum {

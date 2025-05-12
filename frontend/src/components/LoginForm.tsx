@@ -53,7 +53,7 @@ const LoginForm = () => {
               {errors.root && (
                 <p className="text-red-500 text-sm">{errors.root.message}</p>
               )}
-              <Button type="submit" className="w-full">
+              <Button disabled={isPending} type="submit" className="w-full">
                 {isPending ? "submitting... " : "Login"}
               </Button>
             </div>

@@ -1,5 +1,4 @@
 import useLogout from "@/hooks/useLogout";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -10,6 +9,7 @@ import {
 import { Loader2 } from "lucide-react";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { User } from "@/types";
+import AvatarImg from "./shared/AvatarImg";
 
 const LogoutBottom = ({ user, loading }: { user: User; loading: boolean }) => {
   const { logout, error, isLoading } = useLogout();
@@ -24,14 +24,12 @@ const LogoutBottom = ({ user, loading }: { user: User; loading: boolean }) => {
               <Loader2 className=" animate-spin duration-300 ease-in-out" />
             </div>
           ) : (
-            <div className="flex w-5/6 items-center gap-4 mt-4 p-2 border border-gray-200 cursor-pointer hover:bg-gray-100 rounded-4xl">
+            <div className="flex w-5/6 items-center gap-2 mt-4 p-2 border border-gray-200 cursor-pointer hover:bg-gray-100 rounded-4xl">
               <div>
-                <Avatar
-                  style={{ width: "40px", height: "40px", margin: "0 2px" }}
-                >
-                  <AvatarImage src={user?.profileImg || "/svgs/no-user.jpg"} />
-                  <AvatarFallback>{firstTwoChar}</AvatarFallback>
-                </Avatar>
+                <AvatarImg
+                  imageUrl={user.profileImage}
+                  shortName={firstTwoChar}
+                />
               </div>
               <div className="flex flex-col items-start ">
                 <p className="text-gray-800">{user?.name}</p>

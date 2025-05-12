@@ -1,10 +1,10 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Link } from "react-router";
 import PostActions from "./PostActions";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { Post as PostType } from "@/types";
 import DeletePostBtn from "../DeletePostBtn";
 import useGetUser from "@/hooks/useGetUser";
+import AvatarImg from "./AvatarImg";
 
 const Post = ({ post }: { post: PostType }) => {
   const { data: user } = useGetUser();
@@ -15,22 +15,9 @@ const Post = ({ post }: { post: PostType }) => {
       {/* avatar */}
       <Link
         to={`/profile/${post.user.username}`}
-        className="flex self-start justify-center  relative"
+        className="flex self-start justify-center relative"
       >
-        <Avatar
-          style={{
-            width: "40px",
-            height: "40px",
-            margin: "0 10px",
-            borderRadius: "full",
-          }}
-        >
-          <AvatarImage
-            style={{ borderRadius: "100%" }}
-            src={post.user.profileImg || "/svgs/no-user.jpg"}
-          />
-          <AvatarFallback>{shortName}</AvatarFallback>
-        </Avatar>
+        <AvatarImg imageUrl={post.user.profileImage} shortName={shortName} />
       </Link>
       {/* right side of post */}
       <div className="w-full flex flex-col">
