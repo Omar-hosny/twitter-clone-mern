@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import { Bell, House, User } from "lucide-react";
 import { Button } from "../ui/button";
 import LogoutBottom from "../LogoutBottom";
-import useGetUser from "@/hooks/useGetUser";
+import useGetUser from "@/hooks/user/useGetUser";
 
 const Sidebar = () => {
   const { data: user, isLoading } = useGetUser();

@@ -1,7 +1,7 @@
 import NotificationItem from "@/components/NotificationItem";
 import BasicLoading from "@/components/shared/BasicLoading";
 import { Button } from "@/components/ui/button";
-import useGetNotifications from "@/hooks/useGetNotifications";
+import useGetNotifications from "@/hooks/notifications/useGetNotifications";
 import { MoveLeft } from "lucide-react";
 import { Link } from "react-router";
 

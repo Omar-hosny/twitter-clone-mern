@@ -4,9 +4,9 @@ import { Input } from "./ui/input";
 import { DialogClose } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { SwitchCamera } from "lucide-react";
-import useGetUser from "@/hooks/useGetUser";
+import useGetUser from "@/hooks/user/useGetUser";
 import BasicLoading from "./shared/BasicLoading";
-import useUpdateProfile from "@/hooks/useUpdateProfile";
+import useUpdateProfile from "@/hooks/user/useUpdateProfile";
 
 const EditProfileForm = () => {
   const coverRef = useRef<HTMLInputElement>(null);

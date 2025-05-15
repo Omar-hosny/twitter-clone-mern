@@ -2,7 +2,7 @@ import CreatePostForm from "@/components/CreatePostForm";
 import HomeTabs from "@/components/HomeTabs";
 import BasicLoading from "@/components/shared/BasicLoading";
 import Posts from "@/components/shared/Posts";
-import useGetPosts from "@/hooks/useGetPosts";
+import useGetPosts from "@/hooks/posts/useGetPosts";
 import { PostsEnum } from "@/types";
 import { useState } from "react";
 

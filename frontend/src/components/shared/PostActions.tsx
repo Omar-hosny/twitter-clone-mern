@@ -1,7 +1,7 @@
 import { useState, useTransition } from "react";
 import { Heart, MessageCircle, Repeat2 } from "lucide-react";
 import { Button } from "../ui/button";
-import useLikePost from "@/hooks/useLikePost";
+import useLikePost from "@/hooks/posts/useLikePost";
 import { Post as PostType } from "@/types";
 
 const PostActions = ({ post, userId }: { post: PostType; userId: string }) => {

@@ -9,7 +9,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Link } from "react-router";
-import useSignUp from "@/hooks/useSignUp";
+import useSignUp from "@/hooks/auth/useSignUp";
 const SignUpForm = () => {
   const { register, onSubmit, isLoading, errors } = useSignUp();
   return (

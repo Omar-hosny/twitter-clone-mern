@@ -1,7 +1,7 @@
 import { PostsEnum } from "@/types";
 import { useState } from "react";
 import ProfileTabs from "./ProfileTabs";
-import useGetPosts from "@/hooks/useGetPosts";
+import useGetPosts from "@/hooks/posts/useGetPosts";
 import Posts from "./shared/Posts";
 import BasicLoading from "./shared/BasicLoading";
 

@@ -1,4 +1,4 @@
-import useGetSuggestedUsers from "@/hooks/useGetSuggestedUsers";
+import useGetSuggestedUsers from "@/hooks/user/useGetSuggestedUsers";
 import SuggesstionUserItem from "../SuggesstionUserItem";
 import BasicLoading from "./BasicLoading";
 

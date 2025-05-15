@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import useDeletePost from "@/hooks/useDeletePost";
+import useDeletePost from "@/hooks/posts/useDeletePost";
 
 const DeletePostBtn = ({
   postId,

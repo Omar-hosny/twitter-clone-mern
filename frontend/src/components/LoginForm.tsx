@@ -9,7 +9,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Link } from "react-router";
-import useLogin from "@/hooks/useLogin";
+import useLogin from "@/hooks/auth/useLogin";
 
 const LoginForm = () => {
   const { register, onSubmit, errors, isPending } = useLogin();

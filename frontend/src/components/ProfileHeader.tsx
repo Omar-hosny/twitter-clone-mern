@@ -1,4 +1,4 @@
-import useGetUser from "@/hooks/useGetUser";
+import useGetUser from "@/hooks/user/useGetUser";
 import { User } from "@/types";
 import FollowBtn from "./shared/FollowBtn";
 import EditProfileBtn from "./EditProfileBtn";

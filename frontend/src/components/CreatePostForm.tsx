@@ -2,9 +2,9 @@ import { Image, X } from "lucide-react";
 import { useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
-import useGetUser from "@/hooks/useGetUser";
+import useGetUser from "@/hooks/user/useGetUser";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
-import useCreatePost from "@/hooks/useCreatePost";
+import useCreatePost from "@/hooks/posts/useCreatePost";
 import AvatarImg from "./shared/AvatarImg";
 
 const CreatePostForm = () => {

@@ -3,7 +3,7 @@ import Comment from "@/components/shared/Comment";
 import CreateComment from "@/components/shared/CreateComment";
 import HeaderTop from "@/components/shared/HeaderTop";
 import Post from "@/components/shared/Post";
-import useGetPost from "@/hooks/useGetPost";
+import useGetPost from "@/hooks/posts/useGetPost";
 
 // This component will display the details of a specific post
 function PostDetails() {
@@ -27,7 +27,7 @@ function PostDetails() {
   if (!post) return null;
 
   return (
-    <main className="flex flex-col items-center justify-center pb-96 w-full h-screen overflow-y-auto scrollbar-hide ">
+    <main className="flex flex-col items-center pb-96 w-full h-full overflow-y-auto scrollbar-hide ">
       <HeaderTop text="Post" />
       <Post post={post} />
       <CreateComment />

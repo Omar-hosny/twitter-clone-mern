@@ -1,9 +1,9 @@
-import useGetUser from "@/hooks/useGetUser";
+import useGetUser from "@/hooks/user/useGetUser";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import AvatarImg from "./AvatarImg";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
-import useAddComment from "@/hooks/useAddComment";
+import useAddComment from "@/hooks/posts/useAddComment";
 
 const CreateComment = () => {
   const { data: currentUser } = useGetUser();

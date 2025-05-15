@@ -1,4 +1,4 @@
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/hooks/auth/useAuth";
 import { Navigate, Outlet } from "react-router";
 interface Props {
   children: React.ReactNode;

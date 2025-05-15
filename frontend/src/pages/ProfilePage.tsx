@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router";
 import BasicLoading from "@/components/shared/BasicLoading";
 import { Button } from "@/components/ui/button";
-import useGetProfile from "@/hooks/useGetProfile";
+import useGetProfile from "@/hooks/user/useGetProfile";
 import { MoveLeft } from "lucide-react";
 import ProfileHeader from "@/components/ProfileHeader";
 import ProfileInfo from "@/components/ProfileInfo";
