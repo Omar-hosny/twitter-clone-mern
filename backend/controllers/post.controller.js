@@ -141,7 +141,13 @@ export const commentOnPost = async (req, res) => {
     const comment = { user: userId, text };
     post.comments.push(comment);
     await post.save();
-    return res.status(200).json(post);
+    // Populate the comments and the user details for each comment
+    const populatedPost = await Post.findById(postId).populate({
+      path: "comments.user",
+      select:
+        "-password -email -createdAt -updatedAt -likedPosts -bio -followers -following -__v",
+    });
+    return res.status(200).json(populatedPost);
   } catch (error) {
     console.error("Error commenting on post", error.message);
     return res.status(500).json({ error: "Internal server error" });
@@ -300,6 +306,30 @@ export const getAllPosts = async (req, res) => {
     return res.status(200).json(posts);
   } catch (error) {
     console.log("Error retrieving posts:", error.message);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// get post by id
+export const getPostById = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findById(postId)
+      .populate({
+        path: "user",
+        select: "-password -email -createdAt -updatedAt -likedPosts -__v",
+      })
+      .populate({
+        path: "comments.user",
+        select:
+          "-password -email -createdAt -updatedAt -likedPosts -bio -followers -following -__v",
+      });
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    return res.status(200).json(post);
+  } catch (error) {
+    console.log("Error retrieving post:", error.message);
     return res.status(500).json({ message: "Internal server error" });
   }
 };

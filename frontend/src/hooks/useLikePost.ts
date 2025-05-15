@@ -1,9 +1,15 @@
 import { axiosInstance } from "@/lib/axios-global";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useLocation, useParams } from "react-router";
 import { toast } from "sonner";
 
 const useLikePost = () => {
+  const { postId } = useParams();
+  const { pathname } = useLocation();
   const queryClient = useQueryClient();
+
+  // Function to like or unlike a post
+  // This function will be called when the user clicks the like button
   const likePost = async (postId: string) => {
     const res = await axiosInstance.post(`/post/like-unlike/${postId}`);
     return res.data;
@@ -11,14 +17,7 @@ const useLikePost = () => {
   const likeMutation = useMutation({
     mutationFn: likePost,
     mutationKey: ["like-post"],
-    onSuccess: (data) => {
-      console.log(data);
-      // queryClient.invalidateQueries({
-      //   queryKey: ["posts-all"],
-      // });
-      // queryClient.invalidateQueries({
-      //   queryKey: ["posts-following-posts"],
-      // });
+    onSuccess: () => {
       queryClient.invalidateQueries({
         predicate: (query) => {
           return (
@@ -27,6 +26,16 @@ const useLikePost = () => {
           );
         },
       });
+      if (postId) {
+        queryClient.invalidateQueries({
+          queryKey: ["post", postId],
+        });
+      }
+      if (pathname === "/") {
+        queryClient.invalidateQueries({
+          queryKey: ["posts-all"],
+        });
+      }
     },
     onError: (error) => {
       console.log(error);

@@ -18,7 +18,7 @@ export interface Post {
   text: string;
   image: string;
   likes: string[];
-  comments: string[];
+  comments: Comment[];
 }
 
 // types/notifications for Notification component
@@ -36,6 +36,14 @@ export interface Notification {
   isRead: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Comment {
+  _id: string;
+  text: string;
+  user: User;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export enum PostsEnum {

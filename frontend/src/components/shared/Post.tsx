@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import PostActions from "./PostActions";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { Post as PostType } from "@/types";
@@ -7,13 +7,30 @@ import useGetUser from "@/hooks/useGetUser";
 import AvatarImg from "./AvatarImg";
 
 const Post = ({ post }: { post: PostType }) => {
+  const navigate = useNavigate();
   const { data: user } = useGetUser();
 
   const shortName = getFirstTwoChar(post.user.name ?? "");
+  const handlePostClick = () => {
+    navigate(`/post/${post._id}`);
+  };
+
+  const stopPropagation = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+  };
+
+  if (!post) return null;
   return (
-    <article className="w-full flex items-center gap-2 border-b border-gray-200 p-2">
+    <div
+      onClick={handlePostClick}
+      className="w-full flex items-center gap-2 border-b
+       border-gray-200 p-2 hover:bg-gray-50 cursor-pointer"
+    >
       {/* avatar */}
       <Link
+        onClick={stopPropagation}
         to={`/profile/${post.user.username}`}
         className="flex self-start justify-center relative"
       >
@@ -24,6 +41,7 @@ const Post = ({ post }: { post: PostType }) => {
         {/* name and username */}
         <div className="flex-1 flex items-center justify-between">
           <Link
+            onClick={stopPropagation}
             to={`/profile/${post.user.username}`}
             className="flex items-center gap-1"
           >
@@ -51,7 +69,7 @@ const Post = ({ post }: { post: PostType }) => {
         </div>
         <PostActions post={post} userId={user?._id ?? ""} />
       </div>
-    </article>
+    </div>
   );
 };
 

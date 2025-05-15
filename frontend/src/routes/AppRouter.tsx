@@ -7,6 +7,7 @@ import SignUpPage from "@/pages/auth/SignUpPage";
 import HomePage from "@/pages/HomePage";
 import Notifications from "@/pages/Notifications";
 import ProfilePage from "@/pages/ProfilePage";
+import PostDetailsPage from "@/pages/PostDetailsPage";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import PrivateRoute from "@/services/PrivateRoute";
 import PublicRoute from "@/services/PublicRoute";
@@ -41,6 +42,16 @@ const router = createBrowserRouter([
       <PrivateRoute>
         <Layout>
           <Notifications />
+        </Layout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/post/:postId",
+    element: (
+      <PrivateRoute>
+        <Layout>
+          <PostDetailsPage />
         </Layout>
       </PrivateRoute>
     ),

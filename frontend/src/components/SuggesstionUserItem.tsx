@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { User } from "@/types";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 

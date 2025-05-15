@@ -7,6 +7,7 @@ import {
   getAllPosts,
   getFollowingPosts,
   getLikedPosts,
+  getPostById,
   getUserPosts,
   likeUnlikePost,
 } from "../controllers/post.controller.js";
@@ -27,5 +28,6 @@ router.get("/liked-posts/:id", protectedRoute, getLikedPosts);
 router.get("/following-posts", protectedRoute, getFollowingPosts);
 router.get("/all", protectedRoute, getAllPosts);
 router.get("/user-posts/:username", protectedRoute, getUserPosts);
+router.get("/:postId", protectedRoute, getPostById);
 
 export default router;
