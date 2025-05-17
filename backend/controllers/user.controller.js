@@ -215,3 +215,28 @@ export const updateUserProfile = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+//  search user controller function
+export const searchUser = async (req, res) => {
+  const { query } = req.query;
+  try {
+    // find users whose name or bio contains the query string
+    const users = await User.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { username: { $regex: query, $options: "i" } },
+      ],
+    })
+      .limit(5) // limit the number of results to 5
+      .select(
+        "-password -__v -following -followers -createdAt -updatedAt -bio -likedPosts -link"
+      ); // exclude password from the response
+
+    // send response to client
+    return res.status(200).json({ users });
+  } catch (error) {
+    // handle error and send appropriate response to client
+    console.log("Error searching user:", error.message);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
