@@ -1,5 +1,5 @@
 import { Ellipsis, Loader2 } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogClose,
@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../ui/dialog";
 import useDeletePost from "@/hooks/posts/useDeletePost";
 
 const DeletePostBtn = ({

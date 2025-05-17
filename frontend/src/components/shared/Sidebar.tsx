@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import { Bell, House, User } from "lucide-react";
 import { Button } from "../ui/button";
-import LogoutBottom from "../LogoutBottom";
+import LogoutBottom from "../auth/LogoutBottom";
 import useGetUser from "@/hooks/user/useGetUser";
 
 const Sidebar = () => {

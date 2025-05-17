@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { DialogClose } from "./ui/dialog";
-import { Button } from "./ui/button";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { DialogClose } from "../ui/dialog";
+import { Button } from "../ui/button";
 import { SwitchCamera } from "lucide-react";
 import useGetUser from "@/hooks/user/useGetUser";
-import BasicLoading from "./shared/BasicLoading";
+import BasicLoading from "../shared/BasicLoading";
 import useUpdateProfile from "@/hooks/user/useUpdateProfile";
 
 const EditProfileForm = () => {

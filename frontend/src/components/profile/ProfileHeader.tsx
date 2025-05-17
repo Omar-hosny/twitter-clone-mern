@@ -1,8 +1,8 @@
 import useGetUser from "@/hooks/user/useGetUser";
 import { User } from "@/types";
-import FollowBtn from "./shared/FollowBtn";
+import FollowBtn from "../shared/FollowBtn";
 import EditProfileBtn from "./EditProfileBtn";
-import AvatarImg from "./shared/AvatarImg";
+import AvatarImg from "../shared/AvatarImg";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 
 const ProfileHeader = ({ user }: { user: User }) => {

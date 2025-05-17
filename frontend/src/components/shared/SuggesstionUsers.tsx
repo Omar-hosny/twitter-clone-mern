@@ -1,6 +1,6 @@
 import useGetSuggestedUsers from "@/hooks/user/useGetSuggestedUsers";
-import SuggesstionUserItem from "../SuggesstionUserItem";
 import BasicLoading from "./BasicLoading";
+import SuggesstionUserItem from "../home/SuggesstionUserItem";
 
 const SuggesstionUsers = () => {
   const { data: users, isLoading } = useGetSuggestedUsers();

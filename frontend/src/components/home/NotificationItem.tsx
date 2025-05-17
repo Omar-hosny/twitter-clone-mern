@@ -2,7 +2,7 @@ import { Notification } from "@/types";
 import { Heart, UserRoundPlus } from "lucide-react";
 
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
-import AvatarImg from "./shared/AvatarImg";
+import AvatarImg from "../shared/AvatarImg";
 
 const NotificationItem = ({ notification }: { notification: Notification }) => {
   const shortName = getFirstTwoChar(notification.from.name ?? "");

@@ -1,15 +1,15 @@
 import useLogout from "@/hooks/auth/useLogout";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 import { Loader2 } from "lucide-react";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { User } from "@/types";
-import AvatarImg from "./shared/AvatarImg";
+import AvatarImg from "../shared/AvatarImg";
 
 const LogoutBottom = ({ user, loading }: { user: User; loading: boolean }) => {
   const { logout, error, isLoading } = useLogout();

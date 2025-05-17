@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "@/components/shared/Sidebar";
 import SuggesstionUsers from "@/components/shared/SuggesstionUsers";
+import SearchUsers from "@/components/home/SearchUsers";
 
 const Layout = ({ children }: { children: React.ReactElement }) => {
   return (
@@ -20,6 +21,7 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
         {children}
       </main>
       <div className="p-4 hidden xl:col-span-3 xl:block  ">
+        <SearchUsers />
         <SuggesstionUsers />
       </div>
     </div>

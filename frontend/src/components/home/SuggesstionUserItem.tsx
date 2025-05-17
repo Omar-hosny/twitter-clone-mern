@@ -1,9 +1,8 @@
 import { Link } from "react-router";
 import { User } from "@/types";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
-
-import FollowBtn from "./shared/FollowBtn";
-import AvatarImg from "./shared/AvatarImg";
+import AvatarImg from "../shared/AvatarImg";
+import FollowBtn from "../shared/FollowBtn";
 
 const SuggesstionUserItem = ({ user }: { user: User }) => {
   const shortName = getFirstTwoChar(user.name ?? "");

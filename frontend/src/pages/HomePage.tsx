@@ -1,5 +1,5 @@
-import CreatePostForm from "@/components/CreatePostForm";
-import HomeTabs from "@/components/HomeTabs";
+import HomeTabs from "@/components/home/HomeTabs";
+import CreatePostForm from "@/components/posts/CreatePostForm";
 import BasicLoading from "@/components/shared/BasicLoading";
 import Posts from "@/components/shared/Posts";
 import useGetPosts from "@/hooks/posts/useGetPosts";

@@ -31,7 +31,7 @@ function PostDetails() {
       <HeaderTop text="Post" />
       <Post post={post} />
       <CreateComment />
-      <div className="w-full flex flex-col  ">
+      <div className="w-full flex flex-col">
         {post.comments.map((comment) => (
           <Comment key={comment._id} comment={comment} />
         ))}

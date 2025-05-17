@@ -3,9 +3,9 @@ import BasicLoading from "@/components/shared/BasicLoading";
 import { Button } from "@/components/ui/button";
 import useGetProfile from "@/hooks/user/useGetProfile";
 import { MoveLeft } from "lucide-react";
-import ProfileHeader from "@/components/ProfileHeader";
-import ProfileInfo from "@/components/ProfileInfo";
-import ProfilePosts from "@/components/ProfilePosts";
+import ProfileHeader from "@/components/profile/ProfileHeader";
+import ProfileInfo from "@/components/profile/ProfileInfo";
+import ProfilePosts from "@/components/profile/ProfilePosts";
 
 const ProfilePage = () => {
   const { username } = useParams();

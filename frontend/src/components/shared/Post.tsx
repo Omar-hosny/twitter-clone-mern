@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 import PostActions from "./PostActions";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { Post as PostType } from "@/types";
-import DeletePostBtn from "../DeletePostBtn";
+import DeletePostBtn from "../posts/DeletePostBtn";
 import useGetUser from "@/hooks/user/useGetUser";
 import AvatarImg from "./AvatarImg";
 

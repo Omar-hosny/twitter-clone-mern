@@ -2,8 +2,8 @@ import { PostsEnum } from "@/types";
 import { useState } from "react";
 import ProfileTabs from "./ProfileTabs";
 import useGetPosts from "@/hooks/posts/useGetPosts";
-import Posts from "./shared/Posts";
-import BasicLoading from "./shared/BasicLoading";
+import Posts from "../shared/Posts";
+import BasicLoading from "../shared/BasicLoading";
 
 const ProfilePosts = ({
   userId,

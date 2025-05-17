@@ -53,4 +53,12 @@ export enum PostsEnum {
   userPosts = `user-posts/:userId`,
 }
 
+export interface UserSearch {
+  _id: string;
+  name: string;
+  username: string;
+  profileImage: string;
+  email: string;
+}
+
 export type SelectedTab = "following-posts" | "all";
