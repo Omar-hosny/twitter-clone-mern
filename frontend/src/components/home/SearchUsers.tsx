@@ -34,6 +34,7 @@ const SearchUsers = () => {
     };
   }, [query]);
 
+  // Close the search results when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -61,7 +62,7 @@ const SearchUsers = () => {
         px-4 py-1.5 rounded-xl 
        w-full border focus:ring-1 focus:ring-blue-400! focus:border-0"
       >
-        <Search className="h-4 w-4 text-gray-500" />
+        <Search className="h-4 w-4 text-gray-500 dark:text-gray-50" />
         <Input
           value={query}
           onFocus={() => setOpen(true)}
@@ -76,8 +77,8 @@ const SearchUsers = () => {
       {open && (
         <div
           ref={containerRef}
-          className="absolute top-full mt-2 left-0 right-0 bg-white 
-      shadow-lg rounded-xl w-full max-h-[300px] z-10 overflow-y-auto scrollbar-hide pb-10 border border-gray-200"
+          className="absolute top-full mt-2 left-0 right-0 bg-white  dark:bg-gray-950 
+      shadow-lg rounded-xl w-full max-h-[300px] z-10 overflow-y-auto scrollbar-hide pb-10 border border-gray-200 dark:border-gray-700"
         >
           <SearchList
             users={data?.users || []}

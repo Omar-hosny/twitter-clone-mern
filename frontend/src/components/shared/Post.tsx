@@ -26,7 +26,7 @@ const Post = ({ post }: { post: PostType }) => {
     <div
       onClick={handlePostClick}
       className="w-full flex items-center gap-2 border-b
-       border-gray-200 p-2 hover:bg-gray-50 cursor-pointer"
+       border-gray-200 dark:border-gray-700 p-2 hover:bg-gray-50 dark:hover:bg-black/20  cursor-pointer"
     >
       {/* avatar */}
       <Link
@@ -45,8 +45,12 @@ const Post = ({ post }: { post: PostType }) => {
             to={`/profile/${post.user.username}`}
             className="flex items-center gap-1"
           >
-            <p className="text-gray-800 font-semibold">{post.user.name}</p>
-            <p className="text-gray-400">@{post.user.username}</p>
+            <p className="text-gray-800 dark:text-gray-50 font-semibold">
+              {post.user.name}
+            </p>
+            <p className="text-gray-400 dark:text-gray-500">
+              @{post.user.username}
+            </p>
           </Link>
           {/* delete post button */}
           <DeletePostBtn
@@ -58,9 +62,10 @@ const Post = ({ post }: { post: PostType }) => {
 
         {/* post body */}
         <div className="flex flex-col gap-3 mt-2">
-          <p className=" text-gray-800">{post.text}</p>
+          <p className=" text-gray-800 dark:text-gray-50">{post.text}</p>
           {post.image && (
             <img
+              loading="lazy"
               className="w-full object-contain max-h-[450px]  rounded-lg"
               src={post.image}
               alt="postimage"

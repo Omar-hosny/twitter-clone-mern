@@ -11,7 +11,7 @@ const CreateComment = () => {
   const { register, onSubmit, errors, isLoading } = useAddComment();
 
   return (
-    <div className="flex items-center mt-2 border-b border-gray-200 w-full">
+    <div className="flex items-center mt-2 border-b border-gray-200 dark:border-gray-700 w-full">
       <div className="flex self-start justify-center p-2 relative">
         <AvatarImg imageUrl={currentUser?.profileImage} shortName={shortName} />
       </div>
@@ -26,13 +26,13 @@ const CreateComment = () => {
           <p className="text-red-500 text-sm py-2">{errors?.text?.message}</p>
         )}
 
-        <span className="w-[98%] h-[1px] bg-gray-200 mt-2" />
+        <span className="w-[98%] h-[1px] bg-gray-200 dark:bg-gray-700 mt-2" />
         <div className="flex items-center ml-auto  p-2">
           <Button
             disabled={isLoading}
             type="submit"
             size="sm"
-            className=" rounded-full px-4 py-2 mx-2"
+            className="rounded-full px-4 py-2 mx-2"
           >
             reply
           </Button>

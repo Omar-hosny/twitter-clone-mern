@@ -40,7 +40,7 @@ const CreatePostForm = () => {
   };
 
   return (
-    <div className="flex items-center mt-2 border-b border-gray-100">
+    <div className="flex items-center mt-2 border-b border-gray-100 dark:border-gray-700">
       <div className="flex self-start justify-center p-2 relative">
         <AvatarImg imageUrl={data?.profileImage} shortName={shortName} />
       </div>
@@ -50,6 +50,7 @@ const CreatePostForm = () => {
           className="w-[98%] p-4"
           rows={4}
           {...register("text")}
+          autoComplete="off new-password"
         />
         {errors?.text && (
           <p className="text-red-500 text-sm py-2">{errors?.text?.message}</p>
@@ -67,7 +68,7 @@ const CreatePostForm = () => {
                 setValue("image", "");
               }}
               size="icon"
-              className="absolute top-2 right-2 bg-gray-50"
+              className="absolute top-2 right-2 bg-gray-50 dark:bg-gray-800"
             >
               <X className=" w-6! h-6!" />
             </Button>
@@ -78,7 +79,7 @@ const CreatePostForm = () => {
             />
           </div>
         )}
-        <span className="w-[98%] h-[1px] bg-gray-100 mt-2" />
+        <span className="w-[98%] h-[1px] bg-gray-100 dark:bg-gray-700 mt-2" />
         <div className="flex items-center justify-between p-2">
           <Button
             asChild

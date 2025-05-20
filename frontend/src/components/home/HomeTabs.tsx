@@ -23,12 +23,14 @@ const HomeTabs = ({ setActiveTab, activeTab }: HomeTabsProps) => {
   };
 
   return (
-    <div className="w-full border-b border-gray-200">
+    <div className="w-full border-b border-gray-200 dark:border-gray-700">
       <div className="flex">
         <button
           onClick={() => handleTabChange(PostsEnum.all)}
           className={`flex-1 py-4 text-center font-medium relative ${
-            activeTab === PostsEnum.all ? "" : "text-gray-500 hover:bg-gray-100"
+            activeTab === PostsEnum.all
+              ? ""
+              : "text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900"
           }`}
         >
           For you
@@ -41,7 +43,7 @@ const HomeTabs = ({ setActiveTab, activeTab }: HomeTabsProps) => {
           className={`flex-1 py-4 text-center font-medium relative ${
             activeTab === PostsEnum.following
               ? ""
-              : "text-gray-500 hover:bg-gray-100"
+              : "text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900"
           }`}
         >
           Following

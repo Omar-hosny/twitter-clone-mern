@@ -22,14 +22,14 @@ const ProfileTabs = ({ setActiveTab, activeTab }: ProfileTabsProps) => {
     }
   };
   return (
-    <div className="w-full border-b border-gray-200">
+    <div className="w-full border-b border-gray-200 dark:border-gray-700">
       <div className="flex">
         <button
           onClick={() => handleTabChange(PostsEnum.userPosts)}
           className={`flex-1 py-4 text-center font-medium relative ${
             activeTab === PostsEnum.userPosts
               ? ""
-              : "text-gray-500 hover:bg-gray-100"
+              : "text-gray-500 dark:text-gray-100  hover:bg-gray-100 dark:hover:bg-gray-700"
           }`}
         >
           Posts
@@ -42,7 +42,7 @@ const ProfileTabs = ({ setActiveTab, activeTab }: ProfileTabsProps) => {
           className={`flex-1 py-4 text-center font-medium relative ${
             activeTab === PostsEnum.liked
               ? ""
-              : "text-gray-500 hover:bg-gray-100"
+              : "text-gray-500 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700"
           }`}
         >
           Liked

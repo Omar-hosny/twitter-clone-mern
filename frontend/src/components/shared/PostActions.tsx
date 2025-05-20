@@ -41,7 +41,7 @@ const PostActions = ({ post, userId }: { post: PostType; userId: string }) => {
   };
 
   return (
-    <div className="w-full flex items-center justify-evenly pt-2 text-gray-800 text-sm">
+    <div className="w-full flex items-center justify-evenly pt-2 text-gray-800 dark:text-gray-200 text-sm">
       <Button asChild variant="ghost" className="rounded-full">
         <span className="flex items-center gap-1">
           <MessageCircle size={20} />

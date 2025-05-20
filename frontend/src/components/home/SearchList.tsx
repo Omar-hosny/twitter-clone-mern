@@ -43,14 +43,16 @@ const SearchList = ({
         <li key={user._id}>
           <Link
             to={`/profile/${user.username}`}
-            className="flex items-center gap-2 w-full hover:bg-gray-100 p-2 rounded-lg transition-colors duration-200"
+            className="flex items-center gap-2 w-full hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors duration-200"
           >
             <div className="flex items-center">
               <AvatarImg imageUrl={user.profileImage} shortName="OH" />
             </div>
             <div className="flex flex-col items-start">
-              <p className="text-gray-800">{user.name}</p>
-              <p className="text-gray-600 text-sm">@{user.username}</p>
+              <p className="text-gray-800 dark:text-gray-50">{user.name}</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                @{user.username}
+              </p>
             </div>
           </Link>
         </li>

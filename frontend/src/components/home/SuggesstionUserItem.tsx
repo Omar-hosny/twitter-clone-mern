@@ -21,8 +21,10 @@ const SuggesstionUserItem = ({ user }: { user: User }) => {
           />
         </div>
         <div className="flex flex-col items-start ">
-          <p className="text-gray-800">{user.name}</p>
-          <p className="text-gray-600 text-sm">@{user.username}</p>
+          <p className="text-gray-800 dark:text-gray-50">{user.name}</p>
+          <p className="text-gray-600 dark:text-gray-500 text-sm">
+            @{user.username}
+          </p>
         </div>
       </Link>
       <div>

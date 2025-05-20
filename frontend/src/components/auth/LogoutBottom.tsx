@@ -6,12 +6,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogOut, Moon, Sun } from "lucide-react";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { User } from "@/types";
 import AvatarImg from "../shared/AvatarImg";
+import { useTheme } from "@/hooks/theme/useTheme";
 
 const LogoutBottom = ({ user, loading }: { user: User; loading: boolean }) => {
+  const { theme, setTheme } = useTheme();
   const { logout, error, isLoading } = useLogout();
   const firstTwoChar = getFirstTwoChar(user.name ?? "");
   return (
@@ -20,11 +22,17 @@ const LogoutBottom = ({ user, loading }: { user: User; loading: boolean }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           {loading || isLoading ? (
-            <div className="flex w-5/6 items-center justify-center  mt-4 p-2 border border-gray-200 cursor-pointer hover:bg-gray-100 rounded-4xl">
+            <div
+              className="flex w-5/6 items-center justify-center  mt-4 p-2 border
+             border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:bg-gray-700 rounded-4xl"
+            >
               <Loader2 className=" animate-spin duration-300 ease-in-out" />
             </div>
           ) : (
-            <div className="flex w-5/6 items-center gap-2 mt-4 p-2 border border-gray-200 cursor-pointer hover:bg-gray-100 rounded-4xl">
+            <div
+              className="flex w-5/6 items-center gap-2 mt-4 p-2 border border-gray-200  dark:border-gray-700
+            cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded-4xl"
+            >
               <div>
                 <AvatarImg
                   imageUrl={user.profileImage}
@@ -32,17 +40,30 @@ const LogoutBottom = ({ user, loading }: { user: User; loading: boolean }) => {
                 />
               </div>
               <div className="flex flex-col items-start ">
-                <p className="text-gray-800">{user?.name}</p>
-                <p className="text-gray-600">@{user?.username}</p>
+                <p className="text-gray-800 dark:text-gray-50">{user?.name}</p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  @{user?.username}
+                </p>
               </div>
             </div>
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-full">
-          <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
+          <DropdownMenuItem className="cursor-pointer hover:bg-gray-100 dark:bg-gray-700">
             <Button variant="ghost" onClick={logout}>
-              Logout
+              <LogOut /> Logout
             </Button>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
+            {theme === "light" ? (
+              <Button variant="ghost" onClick={() => setTheme("dark")}>
+                <Moon /> Dark
+              </Button>
+            ) : (
+              <Button variant="ghost" onClick={() => setTheme("light")}>
+                <Sun /> light
+              </Button>
+            )}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -11,7 +11,7 @@ const useGetSearch = ({ query }: { query: string }) => {
   const { data, isLoading, isFetching, error } = useQuery({
     queryKey: [`searchUsers`, query],
     queryFn: getSearchUsers,
-    // enabled: !!query, // Only run the query if the query string is not empty
+    enabled: !!query, // Only run the query if the query string is not empty
     // refetchOnWindowFocus: false, // Optional: Prevent refetching on window focus
   });
 

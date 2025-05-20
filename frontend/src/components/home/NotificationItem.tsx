@@ -10,7 +10,7 @@ const NotificationItem = ({ notification }: { notification: Notification }) => {
   return (
     <article
       className={` w-full flex items-center gap-2 border-b
-         border-gray-200 p-2
+         border-gray-200 dark:border-gray-700 p-2
          ${notification.isRead ? "" : "bg-gray-100"}
          `}
     >

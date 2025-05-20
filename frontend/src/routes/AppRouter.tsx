@@ -12,6 +12,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import PrivateRoute from "@/services/PrivateRoute";
 import PublicRoute from "@/services/PublicRoute";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const queryClient = new QueryClient();
 
@@ -81,7 +82,9 @@ const router = createBrowserRouter([
 const AppRouter = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
       <Toaster />
     </QueryClientProvider>

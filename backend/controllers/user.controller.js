@@ -219,6 +219,7 @@ export const updateUserProfile = async (req, res) => {
 //  search user controller function
 export const searchUser = async (req, res) => {
   const { query } = req.query;
+
   try {
     // find users whose name or bio contains the query string
     const users = await User.find({

@@ -27,7 +27,10 @@ function PostDetails() {
   if (!post) return null;
 
   return (
-    <main className="flex flex-col items-center pb-96 w-full h-full overflow-y-auto scrollbar-hide ">
+    <main
+      className=" relative flex flex-col items-center pb-96 w-full h-screen
+     overflow-y-auto scrollbar-hide "
+    >
       <HeaderTop text="Post" />
       <Post post={post} />
       <CreateComment />
