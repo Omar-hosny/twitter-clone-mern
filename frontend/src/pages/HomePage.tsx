@@ -1,4 +1,5 @@
 import HomeTabs from "@/components/home/HomeTabs";
+import HomeTopMobileMenu from "@/components/home/homeTopMobileMenu";
 import CreatePostForm from "@/components/posts/CreatePostForm";
 import BasicLoading from "@/components/shared/BasicLoading";
 import Posts from "@/components/shared/Posts";
@@ -19,6 +20,7 @@ const HomePage = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-y-auto scrollbar-hide">
+      <HomeTopMobileMenu />
       <HomeTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <CreatePostForm />
       <div className="flex flex-col mt-2 pb-96">

@@ -32,10 +32,24 @@ const DeletePostBtn = ({
   const handleDelete = () => {
     deleteMutaion.mutate(postId);
   };
+
+  const stopPropagation = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.SyntheticEvent<HTMLButtonElement, Event>
+  ) => {
+    e.stopPropagation();
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="icon" variant="ghost" className=" cursor-pointer ">
+        <Button
+          onClick={(e) => stopPropagation(e)}
+          size="icon"
+          variant="ghost"
+          className=" cursor-pointer "
+        >
           {isLoading ? (
             <Loader2 className="animate-spin duration-300 ease-in-out" />
           ) : (
@@ -52,12 +66,12 @@ const DeletePostBtn = ({
         </DialogHeader>
 
         <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
+          <DialogClose onAbort={(e) => stopPropagation(e)} asChild>
             <Button size="sm" type="button" variant="secondary">
               Close
             </Button>
           </DialogClose>
-          <DialogClose asChild>
+          <DialogClose asChild onAbort={(e) => stopPropagation(e)}>
             <Button
               size="sm"
               type="button"
