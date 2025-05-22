@@ -32,7 +32,7 @@ function PostDetails() {
      overflow-y-auto scrollbar-hide "
     >
       <HeaderTop text="Post" />
-      <Post post={post} />
+      <Post post={post} isPostDetails />
       <CreateComment />
       <div className="w-full flex flex-col">
         {post.comments.map((comment) => (

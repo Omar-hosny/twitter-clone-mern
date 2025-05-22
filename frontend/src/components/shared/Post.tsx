@@ -6,7 +6,13 @@ import DeletePostBtn from "../posts/DeletePostBtn";
 import useGetUser from "@/hooks/user/useGetUser";
 import AvatarImg from "./AvatarImg";
 
-const Post = ({ post }: { post: PostType }) => {
+const Post = ({
+  post,
+  isPostDetails = false,
+}: {
+  post: PostType;
+  isPostDetails?: boolean;
+}) => {
   const navigate = useNavigate();
   const { data: user } = useGetUser();
 
@@ -16,15 +22,18 @@ const Post = ({ post }: { post: PostType }) => {
   };
 
   const stopPropagation = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    e:
+      | React.MouseEvent<HTMLAnchorElement, MouseEvent>
+      | React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.stopPropagation();
   };
 
   if (!post) return null;
   return (
-    <div
-      onClick={handlePostClick}
+    <article
+      key={post._id}
+      onClick={isPostDetails ? undefined : handlePostClick}
       className="w-full flex items-center gap-2 border-b
        border-gray-200 dark:border-gray-700 p-2 hover:bg-gray-50 dark:hover:bg-black/20  cursor-pointer"
     >
@@ -53,11 +62,13 @@ const Post = ({ post }: { post: PostType }) => {
             </p>
           </Link>
           {/* delete post button */}
-          <DeletePostBtn
-            currentUserId={user?._id ?? null}
-            postId={post._id}
-            userPostId={post.user._id}
-          />
+          {isPostDetails && (
+            <DeletePostBtn
+              currentUserId={user?._id ?? null}
+              postId={post._id}
+              userPostId={post.user._id}
+            />
+          )}
         </div>
 
         {/* post body */}
@@ -72,9 +83,12 @@ const Post = ({ post }: { post: PostType }) => {
             />
           )}
         </div>
-        <PostActions post={post} userId={user?._id ?? ""} />
+        {/* post actions */}
+        <div onClick={stopPropagation}>
+          <PostActions post={post} userId={user?._id ?? ""} />
+        </div>
       </div>
-    </div>
+    </article>
   );
 };
 

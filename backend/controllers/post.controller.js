@@ -83,6 +83,7 @@ export const likeUnlikePost = async (req, res) => {
     const { id: postId } = req.params;
     const userId = req.user._id;
     const post = await Post.findById(postId);
+
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
@@ -93,12 +94,6 @@ export const likeUnlikePost = async (req, res) => {
         { _id: userId },
         { $pull: { likedPosts: postId } }
       );
-      // // remove notification if the user unliked the post
-      // await Notification.findOneAndDelete({
-      //   from: userId,
-      //   to: post.user,
-      //   type: "like",
-      // });
 
       return res.status(200).json({ message: "Post unliked successfully" });
     } else {
@@ -107,13 +102,16 @@ export const likeUnlikePost = async (req, res) => {
         { _id: userId },
         { $push: { likedPosts: postId } }
       );
-      // send notification to the post owner that someone liked their post
-      const notification = new Notification({
-        from: userId,
-        to: post.user,
-        type: "like",
-      });
-      await notification.save();
+
+      if (post.user.toString() !== userId.toString()) {
+        // send notification to the post owner that someone liked their post
+        const notification = new Notification({
+          from: userId,
+          to: post.user,
+          type: "like",
+        });
+        await notification.save();
+      }
 
       return res.status(200).json({ message: "Post liked successfully" });
     }
