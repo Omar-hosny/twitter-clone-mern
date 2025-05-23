@@ -204,6 +204,53 @@ export const deleteCommentFromPost = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+// repost a post
+export const repostPost = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const userId = req.user._id;
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    // Check if the post is already reposted by the user
+    if (post.reposts.includes(userId)) {
+      // remove the repost
+      await Post.updateOne({ _id: postId }, { $pull: { reposts: userId } });
+      return res.status(200).json({ message: "Post un-reposted successfully" });
+    }
+    // Add the repost to the post
+    await Post.updateOne({ _id: postId }, { $push: { reposts: userId } });
+    return res.status(200).json({ message: "Post reposted successfully" });
+  } catch (error) {
+    console.error("Error reposting post", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+//!TODO:  add quote to post by user STILL NEED TO MODIFY
+export const addQuoteToPost = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const userId = req.user._id;
+    const quote = req.body.text;
+    if (!quote) {
+      return res.status(400).json({ message: "Quote text is required" });
+    }
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    await Post.updateOne(
+      { _id: postId },
+      { $push: { quotes: { user: userId, text: quote } } }
+    );
+    return res.status(200).json({ message: "Quote added successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+    console.error("Error adding quote to post", error.message);
+  }
+};
 
 // get liked posts
 export const getLikedPosts = async (req, res) => {
@@ -252,6 +299,7 @@ export const getFollowingPosts = async (req, res) => {
         path: "comments.user",
         select: "-password -email -createdAt -updatedAt -likedPosts -__v",
       });
+
     return res.status(200).json(followingPosts);
   } catch (error) {
     console.log("Error retrieving following posts:", error.message);

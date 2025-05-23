@@ -1,8 +1,9 @@
 import { useState, useTransition } from "react";
-import { Heart, MessageCircle, Repeat2 } from "lucide-react";
+import { Heart, MessageCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import useLikePost from "@/hooks/posts/useLikePost";
 import { Post as PostType } from "@/types";
+import RepostBtn from "../posts/RepostBtn";
 
 const PostActions = ({ post, userId }: { post: PostType; userId: string }) => {
   const { likeMutation } = useLikePost();
@@ -48,12 +49,8 @@ const PostActions = ({ post, userId }: { post: PostType; userId: string }) => {
           <p>{post.comments.length}</p>
         </span>
       </Button>
-      <Button variant="ghost" className="rounded-full">
-        <span className="flex items-center gap-1">
-          <Repeat2 size={20} />
-          <p>2</p>
-        </span>
-      </Button>
+      {/* repost */}
+      <RepostBtn post={post} userId={userId} />
       <Button
         disabled={isPending}
         variant="ghost"

@@ -13,6 +13,24 @@ const postSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    reposts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+        default: [],
+      },
+    ],
+    quotes: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        text: {
+          type: String,
+        },
+      },
+    ],
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
