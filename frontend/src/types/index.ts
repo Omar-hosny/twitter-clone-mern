@@ -19,6 +19,7 @@ export interface Post {
   image: string;
   likes: string[];
   comments: Comment[];
+  createdAt: string;
 }
 
 // types/notifications for Notification component

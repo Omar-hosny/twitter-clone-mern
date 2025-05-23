@@ -19,7 +19,7 @@ function PostDetails() {
   if (error) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <p className="text-red-500">Error: {error.message}</p>
+        <p className="text-red-500 text-lg">Error: Something went wrong</p>
       </div>
     );
   }

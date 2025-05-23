@@ -5,6 +5,7 @@ import { Post as PostType } from "@/types";
 import DeletePostBtn from "../posts/DeletePostBtn";
 import useGetUser from "@/hooks/user/useGetUser";
 import AvatarImg from "./AvatarImg";
+import { formatPostedTime } from "@/lib/formatPostedTime";
 
 const Post = ({
   post,
@@ -57,8 +58,11 @@ const Post = ({
             <p className="text-gray-800 dark:text-gray-50 font-semibold">
               {post.user.name}
             </p>
-            <p className="text-gray-400 dark:text-gray-500">
+            <p className="text-gray-500 dark:text-gray-500">
               @{post.user.username}
+            </p>
+            <p className="text-gray-400 dark:text-gray-500 text-xs">
+              {formatPostedTime(post.createdAt)}
             </p>
           </Link>
           {/* delete post button */}
