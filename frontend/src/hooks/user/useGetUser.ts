@@ -2,6 +2,8 @@ import { axiosInstance } from "@/lib/axios-global";
 import { User } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
+// Custom hook to get the current user
+// This hook uses the `useQuery` hook from react-query to fetch the current user data
 const useGetUser = () => {
   const getUser = async () => {
     const res = await axiosInstance.get("/auth/me");

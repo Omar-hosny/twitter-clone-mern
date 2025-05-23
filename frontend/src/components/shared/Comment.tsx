@@ -2,8 +2,11 @@ import { Comment as CommentType } from "@/types";
 import AvatarImg from "./AvatarImg";
 import getFirstTwoChar from "@/lib/getFirstTwoChar";
 import { Link } from "react-router";
+import DeleteCommentBtn from "../posts/DeleteCommentBtn";
+import useGetUser from "@/hooks/user/useGetUser";
 
 const Comment = ({ comment }: { comment: CommentType }) => {
+  const { data: currentUser } = useGetUser();
   const shortName = getFirstTwoChar(comment.user.name ?? "");
   return (
     <article
@@ -26,6 +29,10 @@ const Comment = ({ comment }: { comment: CommentType }) => {
         </div>
         <p className=" text-gray-800 dark:text-gray-200">{comment.text}</p>
       </div>
+      {/* delete button */}
+      {currentUser && currentUser._id === comment.user._id && (
+        <DeleteCommentBtn commentId={comment._id} />
+      )}
     </article>
   );
 };
